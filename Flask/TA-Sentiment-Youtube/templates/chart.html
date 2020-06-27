@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Final Chart</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js" integrity="sha256-TQq84xX6vkwR0Qs1qH5ADkP+MvH0W+9E7TdHJsoIQiM=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js" integrity="sha256-8zyeSXm+yTvzUN1VgAOinFgaVFEFTyYzWShOy9w7WoQ=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js" integrity="sha256-nZaxPHA2uAaquixjSDX19TmIlbRNCOrf5HO1oHl5p70=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.css" integrity="sha256-IvM9nJf/b5l2RoebiFno92E5ONttVyaEEsdemDC6iQA=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" integrity="sha256-aa0xaJgmK/X74WM224KMQeNQC2xYKwlAt08oZqjeF0E=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/milligram/1.3.0/milligram.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+       <style>
+        {#@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700');#
+
+            .tabinator {
+              background: #fff;
+              padding: 40px;
+              {#font-family: Open Sans;}
+              #}
+            .tabinator h2 {
+              text-align: center;
+              margin-bottom: 20px;
+            }
+            .tabinator input {
+              display: none;
+            }
+            .tabinator label {
+              box-sizing: border-box;
+              display: inline-block;
+              padding: 15px 25px;
+              color: #ccc;
+              margin-bottom: -1px;
+              margin-left: -1px;
+            }
+            .tabinator label:before {
+              content:'';
+              display:block;
+              width:100%;
+              height:15px;
+              background-color:#fff;
+              {#position:absolute;#}
+              bottom:-11px;
+              left:0;
+              z-index:10;
+            }
+            .tabinator label:hover {
+              color: #888;
+              cursor: pointer;
+            }
+            .tabinator input:checked + label {
+              position: relative;
+              color: #000;
+              background: #fff;
+              {#border: 1px solid #bbb;#}
+                border: 1px solid #9b4dca;
+              border-bottom: 1px solid #fff;
+              border-radius: 5px 5px 0 0;
+            }
+
+            .tabinator input:checked + label:after {
+              display: block;
+              content: '';
+              position: absolute;
+              top: 0; right: 0; bottom: 0; left: 0;
+              {#box-shadow: 0 0 15px #939393;#}
+            }
+            #content1, #content2, #content3, #content4, #content5, #content6 {
+              display: none;
+              border-top: 1px solid #9b4dca;
+              padding: 15px;
+            }
+
+            #tab1:checked ~ #content1,
+            #tab2:checked ~ #content2,
+            #tab3:checked ~ #content3,
+            #tab4:checked ~ #content4,
+            #tab5:checked ~ #content5,
+            #tab6:checked ~ #content6 {
+              display: block;
+              {#box-shadow: 0 0 15px #939393;#}
+            }
+
+           .swal-button {
+            background-color: #9b4dca;
+            padding-bottom: 45px;
+            }
+
+           /* The Modal (background) */
+            .modal {
+              display: none; /* Hidden by default */
+              position: fixed; /* Stay in place */
+              z-index: 1; /* Sit on top */
+              padding-top: 100px; /* Location of the box */
+              left: 0;
+              top: 0;
+              width: 100%; /* Full width */
+              height: 100%; /* Full height */
+              overflow: auto; /* Enable scroll if needed */
+              background-color: rgb(0,0,0); /* Fallback color */
+              background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            }
+
+                /* Modal Content */
+                .modal-content {
+                  background-color: #fefefe;
+                  margin: auto;
+                  padding: 20px;
+                  border: 1px solid #888;
+                  width: 80%;
+                }
+
+                /* The Close Button */
+                .close {
+                  color: #aaaaaa;
+                  float: right;
+                  font-size: 28px;
+                  font-weight: bold;
+                }
+
+                .close:hover,
+                .close:focus {
+                  color: #000;
+                  text-decoration: none;
+                  cursor: pointer;
+                }
+
+                th, td {
+                  padding: 5px;
+                  text-align: center;
+                }
+
+                .grid-container {
+                  display: grid;
+                  grid-template-columns: 500px 500px;
+                  padding: 10px;
+                }
+                .grid-item {
+                  {#background-color: rgba(255, 255, 255, 0.8);#}
+                  border: 1px solid rgba(155, 77, 202, 0.6);
+                  padding: 20px;
+                  {#font-size: 30px;#}
+                  text-align: center;
+                }
+    </style>
+</head>
+<body>
+<br>
+<button onclick="comments();" style="float: left; margin-left: 30px"><< COMMENTS</button>
+<button onclick="homepage();" style="float: right; margin-right: 30px">HOMEPAGE >></button>
+
+<center>
+<div class = "tabinator"  style="width: 70%">
+  <input type = "radio" id = "tab1" name = "tabs" checked>
+  <label for = "tab1">Overview</label>
+  <input type = "radio" id = "tab6" name = "tabs">
+  <label for = "tab6">Sentiment Prediction</label>
+  <input type = "radio" id = "tab2" name = "tabs">
+  <label for = "tab2">Decision Tree</label>
+  <input type = "radio" id = "tab3" name = "tabs">
+  <label for = "tab3">Naive Bayes</label>
+  <input type = "radio" id = "tab4" name = "tabs">
+  <label for = "tab4">KNN</label>
+  <input type = "radio" id = "tab5" name = "tabs">
+  <label for = "tab5">SVM</label>
+
+  <div id = "content6">
+      {% if mDT != [] %}
+        <div class="grid-container">
+      <div class="grid-item" style="border-left: none; border-top: none">
+          <p style="font-size: medium"><b>CART</b></p>
+          <canvas id="pieDT"></canvas><br>
+          <p style="font-size: small">Positive : <b>{{ ((mDT[1] + mDT[3])/(mDT[0] + mDT[1] + mDT[2] + mDT[3]))*100 }}%</b> || Negative : <b>{{ ((mDT[0] + mDT[2])/(mDT[0] + mDT[1] + mDT[2] + mDT[3]))*100 }}%</b></p>
+      </div>
+      <div class="grid-item"  style="border-right: none; border-top: none">
+          <p style="font-size: medium"><b>Naive Bayes</b></p>
+          <canvas id="pieNB"></canvas><br>
+          <p style="font-size: small">Positive : <b>{{ ((mNB[1] + mNB[3])/(mNB[0] + mNB[1] + mNB[2] + mNB[3]))*100 }} %</b> || Negative : <b>{{ ((mNB[0] + mNB[2])/(mNB[0] + mNB[1] + mNB[2] + mNB[3]))*100 }}%</b></p>
+      </div>
+      <div class="grid-item" style="border-left: none; border-bottom: none">
+          <p style="font-size: medium"><b>K-NN</b></p>
+          <canvas id="pieKNN"></canvas><br>
+          <p style="font-size: small">Positive : <b>{{ ((mKNN[1] + mKNN[3])/(mKNN[0] + mKNN[1] + mKNN[2] + mKNN[3]))*100 }}%</b> || Negative : <b>{{ ((mKNN[0] + mKNN[2])/(mKNN[0] + mKNN[1] + mKNN[2] + mKNN[3]))*100 }}%</b></p>
+      </div>
+      <div class="grid-item"  style="border-right: none; border-bottom: none">
+          <p style="font-size: medium"><b>SVM</b></p>
+          <canvas id="pieSVM"></canvas><br>
+          <p style="font-size: small">Positive : <b>{{ ((mSVM[1] + mSVM[3])/(mSVM[0] + mSVM[1] + mSVM[2] + mSVM[3]))*100 }}%</b> || Negative : <b>{{ ((mSVM[0] + mSVM[2])/(mSVM[0] + mSVM[1] + mSVM[2] + mSVM[3]))*100 }}%</b></p>
+      </div>
+    </div>
+      {% else %}
+        <p>Scrap comment first</p>
+      {% endif %}
+  </div>
+  <div id = "content1">
+      <div style="width: 90%"><br>
+        <canvas id="myChart"></canvas>
+      </div>
+  </div>
+  <div id = "content2">
+      <div style="width: 70%; float: left"><br>
+          <canvas id="decisionTree"></canvas>
+          <center>
+              <hr>
+              <button id="myBtnDT" style="width: 800px; margin-left: 30px">DETAILS</button>
+                <!-- The Modal -->
+                <div id="myModalDT" class="modal">
+                  <!-- Modal content -->
+                  <div class="modal-content">
+                    <span id="closeDT" class="close">&times;</span>
+                    <table style="width:100%">
+                    `<center>
+                      <tr>
+                        <td style="border: 0"></td>
+                        <td style="border: 0"></td>
+                        <th colspan="2">Predicted</th>
+                        <th rowspan="2">Precision</th>
+                        <th rowspan="2">Recall</th>
+                        <th rowspan="2">F1-Measure</th>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                        <th>Negative</th>
+                        <th>Positive</th>
+                      </tr>
+                      <tr>
+                        <th rowspan="2">True</th>
+                        <th>Negative</th>
+                        <td>{{ mDT[0] }}</td> {# True Negative #}
+                        <td>{{ mDT[1] }}</td> {# False Positive #}
+                        <td>{{ mDT[4] }}</td> {# Precision Negative #}
+                        <td>{{ mDT[5] }}</td> {# Recall Negative #}
+                        <td>{{ mDT[6] }}</td> {# F1-Score Negative #}
+                      </tr>
+                       <tr>
+                        <th>Positive</th>
+                        <td>{{ mDT[2] }}</td> {# False Negative #}
+                        <td>{{ mDT[3] }}</td> {# True Positive #}
+                        <td>{{ mDT[7] }}</td> {# Recall Positive #}
+                        <td>{{ mDT[8] }}</td> {# Precision Positive #}
+                        <td>{{ mDT[9] }}</td> {# F1-Score Positive #}
+                      </tr>
+                      </center>
+                    </table>`
+                  </div>
+                </div>
+          </center>
+      </div>
+      <div><br><br>
+          Precision : <b>{{ dt[0] }}%</b>
+          <hr>
+          Recall : <b>{{ dt[1] }}%</b>
+          <hr>
+          F1-Score : <b>{{ dt[2] }}%</b>
+          <hr>
+          Accuracy : <b>{{ dt[3] }}%</b>
+      </div>
+
+  </div>
+  <div id = "content3">
+     <div style="width: 70%; float: left"><br>
+         <canvas id="NaiveBayes"></canvas>
+         <center>
+              <hr>
+              <button id="myBtnNB" style="width: 800px; margin-left: 30px">DETAILS</button>
+                <!-- The Modal -->
+                <div id="myModalNB" class="modal">
+                  <!-- Modal content -->
+                  <div class="modal-content">
+                    <span id="closeNB" class="close">&times;</span>
+                    <table style="width:100%">
+                    `<center>
+                      <tr>
+                        <td style="border: 0"></td>
+                        <td style="border: 0"></td>
+                        <th colspan="2">Predicted</th>
+                        <th rowspan="2">Precision</th>
+                        <th rowspan="2">Recall</th>
+                        <th rowspan="2">F1-Measure</th>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                        <th>Negative</th>
+                        <th>Positive</th>
+                      </tr>
+                      <tr>
+                        <th rowspan="2">True</th>
+                        <th>Negative</th>
+                        <td>{{ mNB[0] }}</td>
+                        <td>{{ mNB[1] }}</td>
+                        <td>{{ mNB[4] }}</td>
+                        <td>{{ mNB[5] }}</td>
+                        <td>{{ mNB[6] }}</td>
+                      </tr>
+                       <tr>
+                        <th>Positive</th>
+                        <td>{{ mNB[2] }}</td>
+                        <td>{{ mNB[3] }}</td>
+                        <td>{{ mNB[7] }}</td>
+                        <td>{{ mNB[8] }}</td>
+                        <td>{{ mNB[9] }}</td>
+                      </tr>
+                      </center>
+                    </table>`
+                  </div>
+                </div>
+          </center>
+      </div>
+      <div><br><br>
+          Precision : <b>{{ nb[0] }}%</b>
+          <hr>
+          Recall : <b>{{ nb[1] }}%</b>
+          <hr>
+          F1-Score : <b>{{ nb[2] }}%</b>
+          <hr>
+          Accuracy : <b>{{ nb[3] }}%</b>
+      </div>
+  </div>
+  <div id = "content4">
+     <div style="width: 70%; float: left"><br>
+         <canvas id="KNN"></canvas>
+         <center>
+              <hr>
+              <button id="myBtnKNN" style="width: 800px; margin-left: 30px">DETAILS</button>
+                <!-- The Modal -->
+                <div id="myModalKNN" class="modal">
+                  <!-- Modal content -->
+                  <div class="modal-content">
+                    <span id="closeKNN" class="close">&times;</span>
+                    <table style="width:100%">
+                    `<center>
+                      <tr>
+                        <td style="border: 0"></td>
+                        <td style="border: 0"></td>
+                        <th colspan="2">Predicted</th>
+                        <th rowspan="2">Precision</th>
+                        <th rowspan="2">Recall</th>
+                        <th rowspan="2">F1-Measure</th>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                        <th>Negative</th>
+                        <th>Positive</th>
+                      </tr>
+                      <tr>
+                        <th rowspan="2">True</th>
+                        <th>Negative</th>
+                        <td>{{ mKNN[0] }}</td>
+                        <td>{{ mKNN[1] }}</td>
+                        <td>{{ mKNN[4] }}</td>
+                        <td>{{ mKNN[5] }}</td>
+                        <td>{{ mKNN[6] }}</td>
+                      </tr>
+                       <tr>
+                        <th>Positive</th>
+                        <td>{{ mKNN[2] }}</td>
+                        <td>{{ mKNN[3] }}</td>
+                        <td>{{ mKNN[7] }}</td>
+                        <td>{{ mKNN[8] }}</td>
+                        <td>{{ mKNN[9] }}</td>
+                      </tr>
+                      </center>
+                    </table>`
+                  </div>
+                </div>
+          </center>
+      </div>
+      <div><br><br>
+          Precision : <b>{{ knn[0] }}%</b>
+          <hr>
+          Recall : <b>{{ knn[1] }}%</b>
+          <hr>
+          F1-Score : <b>{{ knn[2] }}%</b>
+          <hr>
+          Accuracy : <b>{{ knn[3] }}%</b>
+      </div>
+  </div>
+  <div id = "content5">
+     <div style="width: 70%; float: left"><br>
+         <canvas id="SVM"></canvas>
+         <center>
+              <hr>
+              <button id="myBtnSVM" style="width: 800px; margin-left: 30px">DETAILS</button>
+                <!-- The Modal -->
+                <div id="myModalSVM" class="modal">
+                  <!-- Modal content -->
+                  <div class="modal-content">
+                    <span id="closeSVM" class="close">&times;</span>
+                    <table style="width:100%">
+                    `<center>
+                      <tr>
+                        <td style="border: 0"></td>
+                        <td style="border: 0"></td>
+                        <th colspan="2">Predicted</th>
+                        <th rowspan="2">Precision</th>
+                        <th rowspan="2">Recall</th>
+                        <th rowspan="2">F1-Measure</th>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                        <th>Negative</th>
+                        <th>Positive</th>
+                      </tr>
+                      <tr>
+                        <th rowspan="2">True</th>
+                        <th>Negative</th>
+                        <td>{{ mSVM[0] }}</td>
+                        <td>{{ mSVM[1] }}</td>
+                        <td>{{ mSVM[4] }}</td>
+                        <td>{{ mSVM[5] }}</td>
+                        <td>{{ mSVM[6] }}</td>
+                      </tr>
+                       <tr>
+                        <th>Positive</th>
+                        <td>{{ mSVM[2] }}</td>
+                        <td>{{ mSVM[3] }}</td>
+                        <td>{{ mSVM[7] }}</td>
+                        <td>{{ mSVM[8] }}</td>
+                        <td>{{ mSVM[9] }}</td>
+                      </tr>
+                      </center>
+                    </table>`
+                  </div>
+                </div>
+          </center>
+      </div>
+      <div><br><br>
+          Precision : <b>{{ svm[0] }}%</b>
+          <hr>
+          Recall : <b>{{ svm[1] }}%</b>
+          <hr>
+          F1-Score : <b>{{ svm[2] }}%</b>
+          <hr>
+          Accuracy : <b>{{ svm[3] }}%</b>
+      </div>
+  </div>
+</div>
+</center>
+<script>
+     {% if dt != [] %}
+         swal("Calculation Complete!", "Charts has been created.", "success");
+     {% else %}
+         swal("Oops!", "Please calculate comments first!",
+             {icon: "error",
+            }).then((klikOK) => {
+                if (klikOK) {
+                    window.location.replace('/preview');
+                }
+            });
+     {% endif %}
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Precision', 'Recall', 'F-1 Score', 'Accuracy'],
+        datasets: [{
+            label: 'Decision Tree',//Kalo mau posisi dibawah, harus manual pake <p margin></p>
+            data: [{{ dt[0] }}, {{ dt[1] }}, {{ dt[2] }}, {{  dt[3] }}, 100],
+            backgroundColor: [
+                'rgba(37, 145, 13, 0.2)',
+                'rgba(37, 145, 13, 0.2)',
+                'rgba(37, 145, 13, 0.2)',
+                'rgba(37, 145, 13, 0.2)'
+            ],
+            borderColor: [
+                'rgba(37, 145, 13, 1)',
+                'rgba(37, 145, 13, 1)',
+                'rgba(37, 145, 13, 1)',
+                'rgba(37, 145, 13, 1)',
+            ],
+            borderWidth: 1
+        }, {
+            label: 'Naive Bayes',
+            data: [{{ nb[0] }}, {{ nb[1] }}, {{ nb[2] }}, {{  nb[3] }}, 100],
+            backgroundColor: [
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(54, 162, 235, 0.2)'
+            ],
+            borderColor: [
+                'rgba(54, 162, 235, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(54, 162, 235, 1)'
+            ],
+            borderWidth: 1
+        }, {
+            label: 'KNN',
+            data: [{{ knn[0] }}, {{ knn[1] }}, {{ knn[2] }}, {{  knn[3] }}, 100],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(255, 99, 132, 1)'
+            ],
+            borderWidth: 1
+        }, {
+            label: 'SVM',
+            data: [{{ svm[0] }}, {{ svm[1] }}, {{ svm[2] }}, {{  svm[3] }}, 100],
+            backgroundColor: [
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(255, 206, 86, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 206, 86, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(255, 206, 86, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
+var cart = document.getElementById('decisionTree').getContext('2d');
+var decisionTree = new Chart(cart, {
+    type: 'bar',
+    data: {
+        labels: ['Precision', 'Recall', 'F-1 Score', 'Accuracy'],
+        datasets: [{
+            label: 'Decision Tree',//Kalo mau posisi dibawah, harus manual pake <p margin></p>
+            data: [{{ dt[0] }}, {{ dt[1] }}, {{ dt[2] }}, {{  dt[3] }}, 100],
+            {#data: [63.4, 91.3, 82.4, 74, 100],#}
+            backgroundColor: [
+                'rgba(37, 145, 13, 0.2)',
+                'rgba(37, 145, 13, 0.2)',
+                'rgba(37, 145, 13, 0.2)',
+                'rgba(37, 145, 13, 0.2)'
+            ],
+            borderColor: [
+                'rgba(37, 145, 13, 1)',
+                'rgba(37, 145, 13, 1)',
+                'rgba(37, 145, 13, 1)',
+                'rgba(37, 145, 13, 1)',
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
+var NB = document.getElementById('NaiveBayes').getContext('2d');
+var NaiveBayes = new Chart(NB, {
+    type: 'bar',
+    data: {
+        labels: ['Precision', 'Recall', 'F-1 Score', 'Accuracy'],
+        datasets: [{
+            label: 'Naive Bayes',
+            data: [{{ nb[0] }}, {{ nb[1] }}, {{ nb[2] }}, {{  nb[3] }}, 100],
+            backgroundColor: [
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(54, 162, 235, 0.2)'
+            ],
+            borderColor: [
+                'rgba(54, 162, 235, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(54, 162, 235, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
+var knn = document.getElementById('KNN').getContext('2d');
+var KNN = new Chart(knn, {
+    type: 'bar',
+    data: {
+        labels: ['Precision', 'Recall', 'F-1 Score', 'Accuracy'],
+        datasets: [{
+            label: 'KNN',
+            data: [{{ knn[0] }}, {{ knn[1] }}, {{ knn[2] }}, {{  knn[3] }}, 100],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 99, 132, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(255, 99, 132, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
+var svm = document.getElementById('SVM').getContext('2d');
+var SVM = new Chart(svm, {
+    type: 'bar',
+    data: {
+        labels: ['Precision', 'Recall', 'F-1 Score', 'Accuracy'],
+        datasets: [{
+            label: 'SVM',
+            data: [{{ svm[0] }}, {{ svm[1] }}, {{ svm[2] }}, {{  svm[3] }}, 100],
+            backgroundColor: [
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(255, 206, 86, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 206, 86, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(255, 206, 86, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
+ {% if mDT != [] %}
+    var pieDecisionTree = document.getElementById('pieDT').getContext('2d');
+    var myPieChartDT = new Chart(pieDecisionTree, {
+        type: 'pie',
+        data: {
+        datasets: [{
+
+            data: [{{ mDT[1] + mDT[3] }}, {{ mDT[0] + mDT[2] }}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.7)',
+                'rgba(54, 162, 235, 0.7)'
+            ],
+            borderWidth: 2
+        }],
+        labels: [
+            'Positive',
+            'Negative'
+        ]
+    }
+    });
+
+    var pieNaiveBayes = document.getElementById('pieNB').getContext('2d');
+    var myPieChartNB = new Chart(pieNaiveBayes, {
+        type: 'pie',
+        data: {
+        datasets: [{
+            data: [{{ mNB[1] + mNB[3] }}, {{ mNB[0] + mNB[2] }}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.7)',
+                'rgba(54, 162, 235, 0.7)'
+            ],
+            borderWidth: 2
+        }],
+        labels: [
+            'Positive',
+            'Negative'
+        ]
+    }
+    });
+
+    var pieKNN = document.getElementById('pieKNN').getContext('2d');
+    var myPieChartKNN = new Chart(pieKNN, {
+        type: 'pie',
+        data: {
+        datasets: [{
+            data: [{{ mKNN[1] + mKNN[3] }}, {{ mKNN[0] + mKNN[2] }}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.7)',
+                'rgba(54, 162, 235, 0.7)'
+            ],
+            borderWidth: 2
+        }],
+        labels: [
+            'Positive',
+            'Negative'
+        ]
+    }
+    });
+
+    var pieSVM = document.getElementById('pieSVM').getContext('2d');
+    var myPieChartSVM = new Chart(pieSVM, {
+        type: 'pie',
+        data: {
+        datasets: [{
+            data: [{{ mSVM[1] + mDT[3] }}, {{ mSVM[0] + mSVM[2] }}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.7)',
+                'rgba(54, 162, 235, 0.7)'
+            ],
+            borderWidth: 2
+        }],
+        labels: [
+            'Positive',
+            'Negative'
+        ]
+    }
+    });
+ {% else %}
+     console.log('Not yet Scrap');
+ {% endif %}
+
+     function comments() {
+         //clearInterval(intervalID);
+         window.location.replace('/preview');
+     }
+
+    function homepage() {
+        //clearInterval(intervalID);
+        window.location.replace('/homepage');
+     }
+
+</script>
+
+<script>
+// Get the modal
+var modalDT = document.getElementById("myModalDT");
+var modalNB = document.getElementById("myModalNB");
+var modalKNN = document.getElementById("myModalKNN");
+var modalSVM = document.getElementById("myModalSVM");
+
+// Get the button that opens the modal
+var btnDT = document.getElementById("myBtnDT");
+var btnNB = document.getElementById("myBtnNB");
+var btnKNN = document.getElementById("myBtnKNN");
+var btnSVM = document.getElementById("myBtnSVM");
+
+// Get the <span> element that closes the modal
+var spanDT = document.getElementById("closeDT");
+var spanNB = document.getElementById("closeNB");
+var spanKNN = document.getElementById("closeKNN");
+var spanSVM = document.getElementById("closeSVM");
+
+// When the user clicks the button, open the modal
+btnDT.onclick = function() {
+  modalDT.style.display = "block";
+}
+
+btnNB.onclick = function() {
+  modalNB.style.display = "block";
+}
+
+btnKNN.onclick = function() {
+  modalKNN.style.display = "block";
+}
+
+btnSVM.onclick = function() {
+  modalSVM.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+spanDT.onclick = function() {
+  modalDT.style.display = "none";
+}
+
+spanNB.onclick = function() {
+  modalNB.style.display = "none";
+}
+
+spanKNN.onclick = function() {
+  modalKNN.style.display = "none";
+}
+
+spanSVM.onclick = function() {
+  modalSVM.style.display = "none";
+}
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modalDT) {
+    modalDT.style.display = "none";
+  }
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modalNB) {
+    modalNB.style.display = "none";
+  }
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modalKNN) {
+    modalKNN.style.display = "none";
+  }
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modalSVM) {
+    modalSVM.style.display = "none";
+  }
+}
+
+</script>
+</body>
+</html>

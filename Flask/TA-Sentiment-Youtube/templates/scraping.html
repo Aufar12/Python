@@ -1,0 +1,212 @@
+<html>
+<head>
+    <title id="title">Homepage</title>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/milligram/1.3.0/milligram.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+       <style>
+        body {
+            background-color: #ffffff;
+        }
+
+        .swal-button{
+            background-color: #9b4dca;
+            padding-bottom: 45px;
+        }
+
+        #preloader {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            -moz-transform: translateX(-50%) translateY(-50%);
+            -webkit-transform: translateX(-50%) translateY(-50%);
+            transform: translateX(-50%) translateY(-50%);
+        }
+
+        #loader {
+            display: block;
+            position: relative;
+            left: 50%;
+            top: 50%;
+            width: 150px;
+            height: 150px;
+            margin: -75px 0 0 -75px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: #9370DB;
+            -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+        }
+
+        #loader:before {
+            content: "";
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: #BA55D3;
+            -webkit-animation: spin 3s linear infinite;
+            animation: spin 3s linear infinite;
+        }
+
+        #loader:after {
+            content: "";
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: #FF00FF;
+            -webkit-animation: spin 1.5s linear infinite;
+            animation: spin 1.5s linear infinite;
+        }
+
+        @-webkit-keyframes spin {
+            0%   {
+                -webkit-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            0%   {
+                -webkit-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script type="text/javascript">var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};</script>
+<script type="text/javascript">
+var intervalID = setInterval(update_values,1000);
+
+  function update_values() {
+        $.getJSON($SCRIPT_ROOT + '/_stuff',
+
+      function(data) {
+            //if data.result >= 150, maka print 'Scraping success'
+        $('#result').text(data.result);
+        console.log(data)
+      });
+
+    };
+
+
+
+    function stopTextColor() {
+      //clearInterval(intervalID);
+       window.location.replace('/scrap');
+    }
+
+
+</script>
+<body onload="update_values();">
+
+<script>
+document.getElementById("result").innerHTML;
+</script>
+    <br>
+     <div id="preloader">
+         <h1 id="h1">- Youtube Sentiment Analysis -</h1>
+        <div id="searchbar">
+        <form method="post" id="formScrap">
+            <center><p>Scrap Comments and Calculate Sentiment Accuracy</p></center><br>
+            <input type="text" id="nama" name="nama" required placeholder="Please Input Video Title..">
+            <center>
+                <input type="button" value="Search" onclick="myFunction()">
+                <input type="reset" value="Clear">
+            </center>
+        </form>
+        </div>
+         <div id="total" style="display: none">
+             <br><br><br>
+             <div id="loader"></div><br>
+             <center><h6>Total Comments : <b id="result">?</b></h6></center>
+         </div>
+    </div>
+
+{#	<button onclick="stopTextColor();">Start</button>#}
+	</body>
+     <script type="text/javascript">
+        function preventBack() { window.history.forward(); }
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null };
+    </script>
+<script>
+$(document).ready(function() {
+  $(window).keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+
+
+function myFunction() {
+    var kosong = document.getElementById("nama").value;
+    var nokia = kosong.toLowerCase().includes('NOKIA'.toLowerCase());
+    if (kosong == "") {
+        swal("Oops!", "Please input video title first.", "error");
+    }else if (!nokia) {
+        swal("Oops!", "The title must include the word 'Nokia'.", "error");
+    }else{
+        swal({
+          title: "Are you sure?",
+          text: "Are you sure you want to search videos with this title?",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        swal("Success! Please choose the video from your Google Chrome.", {
+          icon: "success",
+        }).then((klikOK) => {
+            if (klikOK) {
+                document.getElementById("formScrap").submit();
+                myVar = setTimeout(scraping, 35000);
+            }
+        });
+      } else {
+        swal("Canceled.");
+      }
+    });
+    }
+}
+
+function scraping() {
+    var w = document.getElementById("title");
+    var x = document.getElementById("searchbar");
+    var y = document.getElementById("total");
+    var z = document.getElementById("h1");
+    w.innerHTML = "Scraping Comments..";
+    x.style.display = "none";
+    y.style.display = "block";
+    z.style.display = "none";
+}
+</script>
+</html>
