@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=UTF-8 />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.122.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.122.0/examples/js/controls/OrbitControls.min.js"></script>
+    <script src='https://cdn.jsdelivr.net/gh/mrdoob/three.js@r92/examples/js/loaders/GLTFLoader.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.122.0/examples/js/controls/PointerLockControls.js"></script>
+    
+  </head>
+  <body id='body'>
+    <script>
+      let scene, camera, renderer, controls;
+      var keyboard = {};
+      var player = { height:1.8, speed:0.2, turnSpeed:Math.PI*0.02 };
+    
+      function init() {
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(55,window.innerWidth/window.innerHeight,45,30000);
+        camera.position.set(-900,-200,-900);
+        renderer = new THREE.WebGLRenderer({antialias:true});
+        renderer.setSize(window.innerWidth,window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+        //var controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls = new THREE.PointerLockControls(camera, renderer.domElement);
+        controls.addEventListener('change', renderer);
+        controls.minDistance = 500;
+        controls.maxDistance = 1500;
+
+        let body1 = document.getElementById('body');
+        body1.addEventListener('click', ()=>{
+          controls.lock();
+        });
+
+        camera.position.set(0, player.height, -5);
+        camera.lookAt(new THREE.Vector3(0,player.height,0));
+        
+        let materialArray = [];
+        let texture_ft = new THREE.TextureLoader().load('{{url_for('static', filename='images/room/arid_ft.jpg')}}'); //Front
+        let texture_bk = new THREE.TextureLoader().load( '{{url_for('static', filename='images/room/arid_bk.jpg')}}'); //Back
+        let texture_up = new THREE.TextureLoader().load( '{{url_for('static', filename='images/room/arid_up.jpg')}}'); //Up 
+        let texture_dn = new THREE.TextureLoader().load( '{{url_for('static', filename='images/room/arid_dn.jpg')}}'); //Down
+        let texture_rt = new THREE.TextureLoader().load( '{{url_for('static', filename='images/room/arid_rt.jpg')}}'); //Right
+        let texture_lf = new THREE.TextureLoader().load( '{{url_for('static', filename='images/room/arid_lt.jpg')}}'); //Left
+          
+        materialArray.push(new THREE.MeshBasicMaterial( { map: texture_ft }));
+        materialArray.push(new THREE.MeshBasicMaterial( { map: texture_bk }));
+        materialArray.push(new THREE.MeshBasicMaterial( { map: texture_up }));
+        materialArray.push(new THREE.MeshBasicMaterial( { map: texture_dn }));
+        materialArray.push(new THREE.MeshBasicMaterial( { map: texture_rt }));
+        materialArray.push(new THREE.MeshBasicMaterial( { map: texture_lf }));
+   
+        for (let i = 0; i < 6; i++)
+           materialArray[i].side = THREE.BackSide;
+        let skyboxGeo = new THREE.BoxGeometry( 20000, 20000, 20000);
+
+        let skybox = new THREE.Mesh( skyboxGeo, materialArray );
+        scene.add( skybox );  
+        animate();
+      }
+      
+
+      function animate(){
+        requestAnimationFrame(animate);
+        
+        //mesh.rotation.x += 0.01;
+        //mesh.rotation.y += 0.02;
+        
+        if(keyboard[87]){ // W key
+            //console.log(camera.position.z)
+            //camera.position.x -= Math.sin(camera.rotation.y) * player.speed;
+            //camera.position.z -= -Math.cos(camera.rotation.y) * player.speed;
+            //camera.position.z += 20;
+            //console.log(camera.position.z)
+            controls.moveForward(20);
+        }
+        if(keyboard[83]){ // S key
+            camera.position.x += Math.sin(camera.rotation.y) * player.speed;
+            camera.position.z += -Math.cos(camera.rotation.y) * player.speed;
+        }
+        if(keyboard[65]){ // A key
+            camera.position.x += Math.sin(camera.rotation.y + Math.PI/2) * player.speed;
+            camera.position.z += -Math.cos(camera.rotation.y + Math.PI/2) * player.speed;
+        }
+        if(keyboard[68]){ // D key
+            camera.position.x += Math.sin(camera.rotation.y - Math.PI/2) * player.speed;
+            camera.position.z += -Math.cos(camera.rotation.y - Math.PI/2) * player.speed;
+        }
+        
+        if(keyboard[37]){ // left arrow key
+            camera.rotation.y -= player.turnSpeed;
+        }
+        if(keyboard[39]){ // right arrow key
+            camera.rotation.y += player.turnSpeed;
+        }
+        
+        renderer.render(scene, camera);
+    }
+
+    function keyDown(event){
+        keyboard[event.keyCode] = true;
+    }
+
+    function keyUp(event){
+        keyboard[event.keyCode] = false;
+    }
+
+    window.addEventListener('keydown', keyDown);
+    window.addEventListener('keyup', keyUp);
+
+    init();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Three JS Trial</title>
+		
+        <link rel="stylesheet" type="text/css" href="styles.css" />
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/three@0.136.0/build/three.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/three@0.122.0/examples/js/controls/OrbitControls.min.js"></script>
+        <script src='https://cdn.jsdelivr.net/gh/mrdoob/three.js@r92/examples/js/loaders/GLTFLoader.js'></script>
+        <script src="https://cdn.jsdelivr.net/npm/three@0.122.0/examples/js/controls/PointerLockControls.js"></script>
+        <script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/loaders/GLTFLoader.js"></script>
+        
+	</head>
+	<body style="text-align:center;" id='body'>
+		<h2 style="position:absolute; margin-left: 600px; margin-top: 50px">
+			WASD to move, Arrow Keys to turn, Esc to quit camera view.
+        </h2>
+	</body>
+</html>
+
+<script>  
+    // SUMBER : https://www.youtube.com/watch?v=5bc9AN87QtM&t=92s, https://www.youtube.com/watch?v=1TeMXIWRrqE&t=289s
+    /*  
+    const color7 = new THREE.Color( 1, 1, 1 );
+    var scene = new THREE.Scene();
+    scene.background = color7;
+    var camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight,1, 1000);
+    var renderer = new THREE.WebGLRenderer({antialias: true});
+    renderer.setSize(window.innerWidth,window.innerHeight);
+    $('body').append(renderer.domElement);
+    
+    camera.position.z = 5;
+    camera.position.y = 0;
+
+    let grid = new THREE.GridHelper(100, 20, 0x0a0a0a, 0x0a0a0a);
+    grid.position.set(0, -0.5, 0);
+    scene.add(grid);
+
+    const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+    //const geometry = new THREE.OctahedronGeometry( 10, 10 );
+    var material = new THREE.MeshBasicMaterial({color: 0x00ff00});
+    var cube = new THREE.Mesh(geometry,material);
+    scene.add(cube);
+
+    var animate = function(){
+        cube.rotation.y += 0.01;
+        renderer.render(scene,camera);
+        requestAnimationFrame(animate);
+    }
+    
+    animate();
+    */
+
+    var scene, camera, renderer, cube, controls;
+    var meshFloor, ambientLight, light;
+
+    var keyboard = {};
+    //var player = { height:1.8, speed:0.2, turnSpeed:Math.PI*0.02 };
+    var USE_WIREFRAME = false;
+
+    function init(){
+        const color7 = new THREE.Color( 1, 1, 1 );
+        scene = new THREE.Scene();
+        scene.background = color7;
+        camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight,1, 1000);
+        renderer = new THREE.WebGLRenderer({antialias: true});
+        renderer.setSize(window.innerWidth,window.innerHeight);
+        $('body').append(renderer.domElement);
+        
+        camera.position.z = 10;
+        camera.position.y = 0.5;
+
+        let grid = new THREE.GridHelper(100, 20, 0x0a0a0a, 0x0a0a0a);
+        grid.position.set(0, -0.5, 0);
+        scene.add(grid);
+
+        //const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+        const geometry = new THREE.OctahedronGeometry( 1, 11 );
+        var loader = new THREE.TextureLoader();
+        const texture_astra = loader.load('{{url_for('static', filename='images/ice.jpg')}}');
+        var material = new THREE.MeshBasicMaterial({map: texture_astra});
+        cube = new THREE.Mesh(geometry,material);
+        scene.add(cube);
+        cube.position.set(0, 0.5, 1);
+
+        const geometry1 = new THREE.BoxGeometry( 1, 1, 1 );
+        var loader1 = new THREE.TextureLoader();
+        const texture_astra1 = loader.load('{{url_for('static', filename='images/texture.jpg')}}');
+        var material1 = new THREE.MeshBasicMaterial({map: texture_astra1});
+        cube1 = new THREE.Mesh(geometry1,material1);
+        scene.add(cube1);
+        cube1.position.set(5, 0.1, 3);
+
+        const geometry2 = new THREE.ConeGeometry(1,3, 5);
+        var loader2 = new THREE.TextureLoader();
+        const texture_astra2 = loader.load('{{url_for('static', filename='images/texture1.jpg')}}');
+        var material2 = new THREE.MeshBasicMaterial({map: texture_astra2});
+        cube2 = new THREE.Mesh(geometry2,material2);
+        scene.add(cube2);
+        cube2.position.set(-5, 1, -3);
+
+        //car1 = createCar(); 
+        //scene.add(car1);
+        //car1.position.set(-10, 0.5, 7);
+        
+        // Enable Shadows in the Renderer
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.BasicShadowMap;
+        
+        document.body.appendChild(renderer.domElement);
+        controls = new THREE.PointerLockControls(camera, renderer.domElement);
+        controls.addEventListener('change', renderer);
+        controls.minDistance = 500;
+        controls.maxDistance = 1500;
+
+        let body1 = document.getElementById('body');
+        body1.addEventListener('click', ()=>{
+          controls.lock();
+        });
+
+        window.addEventListener ('resize', onWindowResize, false);
+
+
+        hlight = new THREE.AmbientLight (0x404040,100);
+        scene.add(hlight);
+
+
+        const colorPicker = new THREE.Color( 235/255, 233/255, 230/255);
+
+        directionalLight = new THREE.DirectionalLight(colorPicker,10);
+        directionalLight.position.set(100,100,100);
+        directionalLight.castShadow = true;
+        scene.add(directionalLight);
+
+        directionalLight = new THREE.DirectionalLight(colorPicker,10);
+        directionalLight.position.set(-100,-100,-100);
+        directionalLight.castShadow = true;
+        scene.add(directionalLight);
+        
+        let carloader = new THREE.GLTFLoader();
+
+        carloader.load('{{url_for('static', filename='images/objects/car1.gltf')}}', function(gltf){
+            car = gltf.scene.children[0];
+            car.scale.set(1,1,1);
+            scene.add(gltf.scene);
+            car.position.set(-10, -0.5, 3);
+        });
+        
+        carloader.load('{{url_for('static', filename='images/objects/car2.gltf')}}', function(gltf){
+            car1 = gltf.scene.children[0];
+            car1.scale.set(1,1,1);
+            scene.add(gltf.scene);
+            car1.position.set(15, 0.5, 3);
+        });
+
+        carloader.load('{{url_for('static', filename='images/objects/car3.gltf')}}', function(gltf1){
+            car2 = gltf1.scene.children[0];
+            car2.scale.set(1,1,1);
+            car2.receiveShadow = true;
+
+            car2.traverse( function (child) {
+                if ( child instanceof THREE.Mesh ) {
+                    loader2 = new THREE.TextureLoader();
+                    child.material.map = loader.load('{{url_for('static', filename='images/texture1.jpg')}}');
+                    child.material.needsUpdate = true;
+                }
+            });
+
+            scene.add(gltf1.scene);
+            car2.position.set(5, 0.5, -20);
+        });
+        
+        carloader.load('{{url_for('static', filename='images/objects/car5.glb')}}', function(gltf1){
+            car2 = gltf1.scene.children[0];
+            car2.scale.set(2,2,2);
+            car2.receiveShadow = true;
+
+            car2.traverse( function (child) {
+                if ( child instanceof THREE.Mesh ) {
+                    loader2 = new THREE.TextureLoader();
+                    child.material.map = loader.load('{{url_for('static', filename='images/texture1.jpg')}}');
+                    child.material.needsUpdate = true;
+                }
+            });
+
+            scene.add(gltf1.scene);
+            car2.position.set(-5, -0.5, -20);
+        });
+
+        carloader.load('{{url_for('static', filename='images/objects/car6.glb')}}', function(gltf){
+            car = gltf.scene.children[0];
+            car.scale.set(2,2,2);
+
+            car.traverse( function (child) {
+                if ( child instanceof THREE.Mesh ) {
+                    loader2 = new THREE.TextureLoader();
+                    child.material.map = loader.load('{{url_for('static', filename='images/texture1.jpg')}}');
+                    child.material.needsUpdate = true;
+                }
+            });
+
+            scene.add(gltf.scene);
+            car.position.set(12, -0.5, -15);
+        });
+
+        animate();
+    }
+
+    function animate(){
+        requestAnimationFrame(animate);
+        
+        //cube.rotation.x += 0.01;
+        cube.rotation.y += 0.02;
+        
+        if(keyboard[87]){ // W key
+            controls.moveForward(0.1);
+        }
+        if(keyboard[83]){ // S key
+            controls.moveForward(-0.1);
+        }
+        if(keyboard[65]){ // A key
+            controls.moveRight(-0.1);
+        }
+        if(keyboard[68]){ // D key
+            controls.moveRight(0.1);
+        }
+        
+        if(keyboard[37]){ // left arrow key
+            camera.rotation.y += 0.07;
+        }
+
+        //if(keyboard[38]){ // Up arrow key
+            //camera.rotation.x += 0.07;
+        //}
+
+        if(keyboard[39]){ // right arrow key
+            camera.rotation.y -= 0.07;
+        }
+
+        //if(keyboard[40]){ // Down arrow key
+            //camera.rotation.x -= 0.07;
+        //}
+        
+        renderer.render(scene, camera);
+    }
+
+    function keyDown(event){
+        keyboard[event.keyCode] = true;
+    }
+
+    function keyUp(event){
+        keyboard[event.keyCode] = false;
+    }
+
+    function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize( window.innerWidth, window.innerHeight );
+      
+    }
+
+    window.addEventListener('keydown', keyDown);
+    window.addEventListener('keyup', keyUp);
+
+    window.onload = init;
+</script>

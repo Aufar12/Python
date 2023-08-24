@@ -1,0 +1,3 @@
+Login Heroku : heroku login
+Liat Error/Print : heroku logs --tail
+Enable Kirim Email : https://accounts.google.com/DisplayUnlockCaptcha

@@ -1,0 +1,27 @@
+Cara Install :
+- Install Python 3.9.6 (https://www.python.org/downloads/release/python-396/)
+- pip3 install rasa-x --extra-index-url https://pypi.rasa.com/simple
+- Download zip https://github.com/RasaHQ/rasa-3.x-form-examples, bakal ada 5 folder contoh kodingan rasa
+- Buat Sebuah Folder Kosong, buka cmd di path
+- ketik rasa init
+
+Deskripsi File :
+- config.yml --> Setting fallback dan threshold
+- credentials.yml --> Setting api, dan portnya
+- domain.yml --> Ngelist nama intent, entities, slots, forms, dan response utter_*
+- endpoints.yml --> Buat enable action.py (Caranya tinggal unkommen action_endpoint dan baris bawahnya, yaitu url: "http://localhost:5055/webhook")
+- nlu.yml --> isi isi intent nya
+- rules.yml --> untuk definisiin jawaban yang udah pasti, atau buat setting fallback action
+- stories.yml --> definisiin alur percakapan, dan ngeset slot
+- actions.py --> untuk ngoding python buat kasus2 tertentu
+
+Command Penting :
+rasa run actions (buka cmd baru)
+rasa shell
+rasa train
+rasa x
+rasa run --enable-api \(buat api)
+tracker.get_slot('my_float_slot')
+tracker.latest_message['intent'].get('name')
+template vs response : https://forum.rasa.com/t/what-is-the-difference-between-utter-message-template-and-response/47193/2
+

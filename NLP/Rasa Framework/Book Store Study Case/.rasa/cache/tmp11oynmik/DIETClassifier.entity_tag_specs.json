@@ -1,0 +1,44 @@
+[
+  {
+    "tag_name": "entity",
+    "ids_to_tags": {
+      "1": "B-alamat",
+      "2": "I-alamat",
+      "3": "L-alamat",
+      "4": "U-alamat",
+      "5": "B-email",
+      "6": "I-email",
+      "7": "L-email",
+      "8": "U-email",
+      "9": "B-nama",
+      "10": "I-nama",
+      "11": "L-nama",
+      "12": "U-nama",
+      "13": "B-no_telp",
+      "14": "I-no_telp",
+      "15": "L-no_telp",
+      "16": "U-no_telp",
+      "0": "O"
+    },
+    "tags_to_ids": {
+      "B-alamat": 1,
+      "I-alamat": 2,
+      "L-alamat": 3,
+      "U-alamat": 4,
+      "B-email": 5,
+      "I-email": 6,
+      "L-email": 7,
+      "U-email": 8,
+      "B-nama": 9,
+      "I-nama": 10,
+      "L-nama": 11,
+      "U-nama": 12,
+      "B-no_telp": 13,
+      "I-no_telp": 14,
+      "L-no_telp": 15,
+      "U-no_telp": 16,
+      "O": 0
+    },
+    "num_tags": 17
+  }
+]

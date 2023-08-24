@@ -1,0 +1,181 @@
+version: "3.1"
+
+nlu:
+- intent: intent_nama
+  examples: |
+    - nama lengkap gua [Dimas](nama)
+    - nama [Jeni](nama)
+    - nama [Valen](nama), salam kenal
+    - nama [nana](nama)
+    - kenalin gua [lala](nama)
+    - nama [bimo](nama)
+    - nama [megi](nama)
+    - perkenalkan [zaza](nama)
+    - nama [raisa](nama)
+    - nama [jefry](nama)
+    - nama lengkap saya [nicholas](nama)
+    - nama [aufar](nama)
+    - nama [imam](nama)
+    - nama [awan](nama)
+    - nama [juminten](nama)
+    - nama [paijo](nama)
+    - nama [bambang](nama)
+    - nama saya [Andi](nama)
+    - nama saya [Putra](nama)
+    - nama saya [Dimas](nama)
+    - nama saya [Jeni](nama)
+    - namaku [Valen](nama)
+    - namaku [nana](nama)
+    - nama saya [aufar](nama)
+    - nama saya [lala](nama)
+    - namaku [bimo](nama)
+    - nama saya [megi](nama)
+    - nama saya [imam](nama)
+    - nama saya [awan](nama)
+    - dengan [riska](nama) mba
+    - dengan [riska](nama)
+    - saya biasa disebut [robi](nama)
+    - saya biasa disebut [bima](nama)
+    - saya biasa disebut [doni](nama)
+    - salam kenal, saya [bobi](nama)
+    - salam kenal, aku [putra](nama)
+    - salam kenal, gua [dina](nama)
+
+- intent: intent_NomorTelp
+  examples: |
+    - [08815253169](no_telp)
+    - [08715253169](no_telp)
+    - [08115253169](no_telp)
+    - [08215253169](no_telp)
+    - nomor telepon saya [08315253169](no_telp)
+    - nomor telepon saya [08415253169](no_telp)
+    - nomor telepon saya [08515253169](no_telp)
+    - nomor telepon aku [08615253169](no_telp)
+    - nomor telepon aku [08715253169](no_telp)
+    - nomor telepon aku [08815253169](no_telp)
+    - [08915253169](no_telp)
+    - [08015253169](no_telp)
+    - [08315253169](no_telp)
+    - no telp ku [08415253169](no_telp)
+    - no telp ku [08515253169](no_telp)
+    - no telp ku [08615253169](no_telp)
+    - no telp [08715253169](no_telp)
+    - no hp [08015253169](no_telp)
+    - nomor hp [08115253169](no_telp)
+    - nomor hp [08215253169](no_telp)
+    - nomor hp [08315253169](no_telp)
+    - nomor hp saya [08415253169](no_telp)
+    - nomor hp saya [08515253169](no_telp)
+    - nomor hp saya [08615253169](no_telp)
+
+- intent: intent_email
+  examples: |
+    - [m.aufar12@gmail.com](email)
+    - [jeni_jani_snsn@yahoo.com](email)
+    - [b123Ahsksk.s_j@rocketmail.com](email)
+    - [tes_123@tes.co.id](email)
+    - [mohammad.aufar@ai.astra.co.id](email)
+    - email saya yaitu [james.jake@company.com](email)
+    - Email saya [xxx123@perusahaan.co.id](email)
+    - email saya yaitu [robert_mifflin222@sebuahperusahaan.com](email)
+    - Email saya [sura123.elektronik@tes.co.id](email)
+    - email saya yaitu [pemain_sinetron@rcti.co.id](email)
+    - Email saya [email12_22tes@email.com](email)
+    - emailku [risk@aaa.com](email) kalo gasalah sih masih aktif
+    - emailku [risk@aaa.com](email) insyaAllah masih aktif
+    - ini loh emailku [aaa@aaa.com](email) ini klo gasalah
+    - jadi emailku [ooo@ooo.com] tpi aku rada lupa passnya
+    - jangan lupa di email [yuy@apaaja.com](email) hehehe
+
+# - intent: intent_alamat
+#   examples: |
+#     - di jalan [Gudang Peluru Selatan II Blok N341](alamat)
+#     - alamat saya [Kebon Baru Selatan Deket Rumah RT](alamat)
+#     - di daerah [Kemanggisan no 10](email) ya
+#     - [Jend A Yani Plasa Simpang Lima, Jawa Tengah](alamat)
+#     - [Sei Batu Rata 3, Sumatera Utara](alamat)
+#     - alamat saya yaitu [Jl Kalibata Pulo 1 RT 004/05 Gg Mesjid Assalafiyah, Dki Jakarta](alamat)
+#     - rumah saya di [Jl Kembang Jepun 135/17-B, Jawa Timur](alamat)
+#     - alamat saya yaitu [Jl Sukarno Hatta 608, Jawa Barat](alamat)
+#     - Alamat saya [Jl. Naripan 55, Jawa Barat](alamat)
+#     - alamat saya yaitu [Jl Mpu Tantular 31, Jawa Tengah](alamat)
+#     - Email saya [Jl. Teuku Cik Ditiro 58, Jati, Medan Maimun](alamat)
+#     - alamatku [Jl. Veteran No. 7&7A, Surabaya](alamat) disitu yaa
+#     - rumahku [Jl H Dogol 54, Dki Jakarta](alamat), daerah situ lah
+#     - ini loh alamat gua [Bacang I 8 A RT 004/01, Dki Jakarta](alamat)
+#     - daerah [Pamulang Villa 1, Dki Jakarta](alamat)
+#     - berikut tempat tinggal [Jl Usaha 25 Cawang II, Dki Jakarta](alamat)
+
+- intent: sapa
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+    - selamat pagi
+    - siang
+    - malam
+    - apa kabar
+    - halo
+    - permisi
+
+- intent: pergi
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+    - selamat tinggal
+    - sampai jumpa
+    - dadah
+    - pamit
+    - pergi
+    - aku pergi dulu
+    - sampai bertemu kembali
+    - sampai berjumpa kembali
+
+- intent: setuju
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+    - iya
+    - yoi
+    - benar
+    - betul
+    - boleh
+    - setuju
+    - aku mau
+    - baik
+    - boleh deh daftar
+    - berminat
+
+- intent: tolak
+  examples: |
+    - tidak
+    - gajadi
+    - cancel
+    - nope
+    - ga
+    - no
+    - bukan
+    - gamau
+    - gausah

@@ -1,0 +1,148 @@
+<html>
+   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>Opening Speech</title>
+    <head>
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/milligram/1.3.0/milligram.css">
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> <!-- stats.js lib -->
+        <script src="http://threejs.org/examples/js/libs/stats.min.js"></script>
+
+        <style>
+            .swal-button{
+              background-color: #9b4dca;
+              padding-bottom: 45px;
+            }
+
+          body {
+            margin: 0;
+            color: #8a33af;
+          }
+            
+          canvas {
+            display: block;
+            vertical-align: bottom;
+          } 
+            
+          #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            background-image: url("");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: 50% 50%;
+          }
+
+        </style>
+    </head>
+    <body>
+        <div id="particles-js"> </div>
+        <p style="display: none;" id="myLabel">This is truly anonymous, so please be real honest with the answer, thanks &#128537; You must answer the question and can't go backwards, I'll take your first answer as the truth.</p> 
+    </body>
+</html>
+
+<script type="text/javascript">
+    function preventBack() { window.history.forward(); }
+    setTimeout("preventBack()", 0);
+    window.onunload = function () { null };
+</script>
+
+<script type="text/javascript">
+        function preventBack() { window.history.forward(); }
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null };
+    </script>
+
+<script>
+
+    swal({
+  title: "Iqra dulu friends",
+  text: document.getElementById('myLabel').innerHTML,
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+  buttons: ["Ga ah mager", "ok, gas"]
+})
+.then((willDelete) => {
+  if (willDelete) {
+    swal("Mantap", "Isi yang jujur yak", {
+            icon: "success",
+            }).then((klikOK) => {
+                if (klikOK) {
+                    window.location.replace('/choice/1/{{session_id}}');
+                }
+            });
+    
+  } else {
+    
+    swal("Isi woy", "Gaboleh keluar", {
+            icon: "error",
+            }).then((klikOK) => {
+                if (klikOK) {
+                    window.location.replace('/');
+                }
+            });
+  }
+});
+
+
+particlesJS("particles-js", {
+  particles: {
+    number: { value: 75, density: { enable: true, value_area: 800 } },
+    color: { value: "#000000" },
+    shape: {
+      type: "circle",
+      stroke: { width: 0, color: "#000000" },
+      polygon: { nb_sides: 5 },
+      image: { src: "img/github.svg", width: 100, height: 100 }
+    },
+    opacity: {
+      value: 0.5,
+      random: false,
+      anim: { enable: false, speed: 1, opacity_min: 0.1, sync: false }
+    },
+    size: {
+      value: 3,
+      random: true,
+      anim: { enable: false, speed: 40, size_min: 0.1, sync: false }
+    },
+    line_linked: {
+      enable: true,
+      distance: 150,
+      color: "#8a33af",
+      opacity: 0.4,
+      width: 1
+    },
+    move: {
+      enable: true,
+      speed: 6,
+      direction: "none",
+      random: false,
+      straight: false,
+      out_mode: "out",
+      bounce: false,
+      attract: { enable: false, rotateX: 600, rotateY: 1200 }
+    }
+  },
+  interactivity: {
+    detect_on: "canvas",
+    events: {
+      onhover: { enable: true, mode: "repulse" },
+      onclick: { enable: true, mode: "push" },
+      resize: true
+    },
+    modes: {
+      grab: { distance: 400, line_linked: { opacity: 1 } },
+      bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 },
+      repulse: { distance: 200, duration: 0.4 },
+      push: { particles_nb: 4 },
+      remove: { particles_nb: 2 }
+    }
+  },
+  retina_detect: true
+});
+
+</script>

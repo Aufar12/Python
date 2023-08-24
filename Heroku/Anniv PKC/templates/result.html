@@ -1,0 +1,159 @@
+<html>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>Result</title>
+    <head>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+      <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> <!-- stats.js lib -->
+      <script src="http://threejs.org/examples/js/libs/stats.min.js"></script>
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+      <style>
+        body {
+          margin: 0;
+          color: #8a33af;
+        }
+            
+        canvas {
+          display: block;
+          vertical-align: bottom;
+        } 
+            
+        #particles-js {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background-color: #ffffff;
+          background-image: url("");
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: 50% 50%;
+        }
+
+        .center {
+          margin: 0;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+          width: 100%;
+          height: 100%;
+        }
+
+        .content {
+          border-radius: 25px;
+          background: #73AD21;
+          padding: 20px;
+          height: 550px; 
+          width: 1000px; 
+          background-color: rgba(0,0,0,0.035); 
+          margin-top: 80px;
+          flex-wrap: wrap;
+        }
+
+
+        img {
+            margin-top: 30px;
+            margin-bottom: 30px;
+            border-radius: 50%;
+            width:400px; 
+            height:350px;
+        }
+
+        .button_content {
+            width:300px; 
+            height:auto;
+            min-height:30px;
+            white-space: normal;
+        }
+
+
+      </style>
+
+    </head>
+
+    <body>
+      <div id="particles-js"> </div>
+      <div class="center">
+        <center><h2 style="margin-top:60px; width: 57%">Thanks {{name}}!! We appreciate your kindness and thought for answering all of the questions.</h2><center>
+        <img src="{{ img_path }}" alt="Avatar">
+        <h2 style="margin-bottom:60px;">{{name}}</h2>
+        <button class="button_content" style="margin-right:100px;" onclick="finishing('HEHE', 'Hehehe', 'Benar,ini');">Yes, I am {{name}}!!</button>
+        <button class="button_content" onclick="finishing('Mon Maap', 'Modelnya baru kemarin dibuat', 'Salah,bukan');">No, I am not {{name}} <span style='font-size:20px;'>&#128557;</span></button>
+      </div>
+
+    </body>
+
+</html>
+
+
+<script>
+    particlesJS("particles-js", {
+  particles: {
+    number: { value: 75, density: { enable: true, value_area: 800 } },
+    color: { value: "#000000" },
+    shape: {
+      type: "circle",
+      stroke: { width: 0, color: "#000000" },
+      polygon: { nb_sides: 5 },
+      image: { src: "img/github.svg", width: 100, height: 100 }
+    },
+    opacity: {
+      value: 0.5,
+      random: false,
+      anim: { enable: false, speed: 1, opacity_min: 0.1, sync: false }
+    },
+    size: {
+      value: 3,
+      random: true,
+      anim: { enable: false, speed: 40, size_min: 0.1, sync: false }
+    },
+    line_linked: {
+      enable: true,
+      distance: 150,
+      color: "#8a33af",
+      opacity: 0.4,
+      width: 1
+    },
+    move: {
+      enable: true,
+      speed: 6,
+      direction: "none",
+      random: false,
+      straight: false,
+      out_mode: "out",
+      bounce: false,
+      attract: { enable: false, rotateX: 600, rotateY: 1200 }
+    }
+  },
+  interactivity: {
+    detect_on: "canvas",
+    events: {
+      onhover: { enable: true, mode: "repulse" },
+      onclick: { enable: true, mode: "push" },
+      resize: true
+    },
+    modes: {
+      grab: { distance: 400, line_linked: { opacity: 1 } },
+      bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 },
+      repulse: { distance: 200, duration: 0.4 },
+      push: { particles_nb: 4 },
+      remove: { particles_nb: 2 }
+    }
+  },
+  retina_detect: true
+});
+
+function finishing(judul, message, hasil){
+    swal(judul, message, {
+            icon: "success",
+            }).then((klikOK) => {
+                if (klikOK) {
+                    window.location.replace('/generate/{{ session_id }}/'+hasil+'{{ name }}');
+                }
+            });
+};
+
+</script>

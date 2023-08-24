@@ -1,0 +1,40 @@
+version: "3.1"
+
+stories:
+
+- story: menolak membership
+  steps:
+  - intent: sapa
+  - action: utter_sapa
+  - action: utter_membership
+  - intent: tolak
+  - action: utter_pergi
+
+- story: mendaftar membership
+  steps:
+  - intent: sapa
+  - action: utter_sapa
+  - action: utter_membership
+  - intent: setuju
+  - action: membership_form
+  - active_loop: membership_form
+  - slot_was_set:
+    - requested_slot: nama
+  - slot_was_set:
+    - nama: John Wick
+  - slot_was_set:
+    - requested_slot: no_telp
+  - slot_was_set:
+    - no_telp: 081774132920
+  - slot_was_set:
+    - requested_slot: email
+  - slot_was_set:
+    - email: m.aufar12@gmail.com
+  - slot_was_set:
+    - requested_slot: alamat
+  - slot_was_set:
+    - alamat: Jl. Gudang Peluru Selatan II Blok N/341
+  # - slot_was_set:
+  #   - requested_slot: null
+  - active_loop: null
+  - action: action_submit_to_db

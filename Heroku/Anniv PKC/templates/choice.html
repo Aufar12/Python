@@ -1,0 +1,184 @@
+<html>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title id='title'>Questions {{page}}</title>
+    <head>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+      <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+      <script src="http://threejs.org/examples/js/libs/stats.min.js"></script>
+
+      <style>
+        body {
+          margin: 0;
+          color: #8a33af;
+        }
+            
+        canvas {
+          display: block;
+          vertical-align: bottom;
+        } 
+            
+        #particles-js {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background-color: #ffffff;
+          background-image: url("");
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: 50% 50%;
+        }
+
+        .center {
+          margin: 0;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+          width: 100%;
+          height: 100%;
+        }
+
+        .content {
+          border-radius: 25px;
+          background: #73AD21;
+          padding: 20px;
+          width: 1000px; 
+          background-color: rgba(0,0,0,0.035); 
+          margin-top: 80px;
+          flex-wrap: wrap;
+          height:auto;
+          min-height:550px;
+          white-space: normal;
+        }
+
+        .grid-container {
+          display: grid;
+          margin-top: 70px;
+          grid-template-columns: auto auto;
+          background-color: rgba(0,0,0,0.01); 
+          padding: 10px;
+          grid-gap: 10px;
+        }
+
+        .grid-item {
+          background-color: rgba(255,255,255, 1); 
+          border: 0.002px outset #8a33af;
+          padding: 40px;
+          font-size: 25px;
+          text-align: center;
+          border-radius: 15px;
+          cursor: pointer;
+          word-wrap: break-word;
+        }
+
+        .grid-item:hover { 
+          background-color: #8a33af; 
+          color: #ffffff; 
+        }
+
+
+        h2 {
+            word-wrap: break-word;
+        }
+
+
+      </style>
+
+    </head>
+
+    <body>
+      <div id="particles-js"> </div>
+      <div class="center">
+        <center><h1 style="margin-top:60px; width: 50%"><marquee>Anniversary 1 year as PKC :D</marquee></h1><center>
+        <center><div class="content">
+        <h3 style="margin-top:50px">{{page}}/17</h3>
+        
+        <center><h2>{{ data[0] }}</h2><center>
+        <div class="grid-container">
+      <div class="grid-item" onclick="myFunction(1)">{{ data[1] }}</div>
+      <div class="grid-item" onclick="myFunction(2)">{{ data[2] }}</div>
+      <div class="grid-item" onclick="myFunction(3)">{{ data[3] }}</div>  
+      <div class="grid-item" onclick="myFunction(4)">{{ data[4] }}</div>
+      </div></div><center>
+      </div>
+
+      <form style="display: none;" id="myForm" method="post"> 
+        <input type="text" id="id_hidden_form" name="name_hidden_form" value="">
+      </form> 
+
+    </body>
+
+</html>
+
+<script type="text/javascript">
+    function preventBack() { window.history.forward(); }
+    setTimeout("preventBack()", 0);
+    window.onunload = function () { null };
+</script>
+
+<script>
+    function myFunction(x) {
+      document.getElementById("id_hidden_form").value = x;
+      document.getElementById("myForm").submit();
+    }
+
+    particlesJS("particles-js", {
+  particles: {
+    number: { value: 75, density: { enable: true, value_area: 800 } },
+    color: { value: "#000000" },
+    shape: {
+      type: "circle",
+      stroke: { width: 0, color: "#000000" },
+      polygon: { nb_sides: 5 },
+      image: { src: "img/github.svg", width: 100, height: 100 }
+    },
+    opacity: {
+      value: 0.5,
+      random: false,
+      anim: { enable: false, speed: 1, opacity_min: 0.1, sync: false }
+    },
+    size: {
+      value: 3,
+      random: true,
+      anim: { enable: false, speed: 40, size_min: 0.1, sync: false }
+    },
+    line_linked: {
+      enable: true,
+      distance: 150,
+      color: "#8a33af",
+      opacity: 0.4,
+      width: 1
+    },
+    move: {
+      enable: true,
+      speed: 6,
+      direction: "none",
+      random: false,
+      straight: false,
+      out_mode: "out",
+      bounce: false,
+      attract: { enable: false, rotateX: 600, rotateY: 1200 }
+    }
+  },
+  interactivity: {
+    detect_on: "canvas",
+    events: {
+      onhover: { enable: true, mode: "repulse" },
+      onclick: { enable: true, mode: "push" },
+      resize: true
+    },
+    modes: {
+      grab: { distance: 400, line_linked: { opacity: 1 } },
+      bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 },
+      repulse: { distance: 200, duration: 0.4 },
+      push: { particles_nb: 4 },
+      remove: { particles_nb: 2 }
+    }
+  },
+  retina_detect: true
+});
+
+</script>

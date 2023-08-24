@@ -1,0 +1,8 @@
+{
+	"displayname": "Pandawacana Friends",
+	"email": "m.aufar12@gmail.com",
+	"server": "smtp.gmail.com",
+	"password": "wyvenfhokrdkhciq",
+	"port": "587",
+	"cara_lewatin_less_secure_gmail" : "https://stackoverflow.com/questions/72576260/whats-solution-for-sending-emails-from-python-while-gmail-the-less-secure-app" 
+}

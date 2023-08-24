@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.1 (Python 3.11.2 on win32)" generated="20230808 13:46:08.503" rpa="false" schemaversion="4">
+<suite id="s1" name="Scraping Senheng" source="C:\Users\Aufar\Documents\Python Files\Robot Framework Selenium\Senheng Web Scraping\scraping_senheng.robot">
+<test id="s1-t1" name="Preparation" line="29">
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>${URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20230808 13:46:09.052" level="INFO">Opening browser 'Chrome' to base url 'https://www.senheng.com.my/home-entertainment/tv.html'.</msg>
+<status status="PASS" starttime="20230808 13:46:09.051" endtime="20230808 13:46:24.975"/>
+</kw>
+<kw name="Create Directory" library="OperatingSystem">
+<arg>${folder_image}</arg>
+<doc>Creates the specified directory.</doc>
+<msg timestamp="20230808 13:46:24.976" level="INFO" html="true">Directory '&lt;a href="file://C:\Users\Aufar\Documents\Python Files\Robot Framework Selenium\Senheng Web Scraping\image_result"&gt;C:\Users\Aufar\Documents\Python Files\Robot Framework Selenium\Senheng Web Scraping\image_result&lt;/a&gt;' already exists.</msg>
+<status status="PASS" starttime="20230808 13:46:24.976" endtime="20230808 13:46:24.976"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20230808 13:46:24.977" endtime="20230808 13:46:25.101"/>
+</kw>
+<status status="PASS" starttime="20230808 13:46:09.051" endtime="20230808 13:46:25.103"/>
+</test>
+<test id="s1-t2" name="Test" line="33">
+<kw name="Go To" library="SeleniumLibrary">
+<arg>https://www.dhl.com/id-en/home/tracking/tracking-express.html</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<msg timestamp="20230808 13:46:25.106" level="INFO">Opening url 'https://www.dhl.com/id-en/home/tracking/tracking-express.html'</msg>
+<status status="PASS" starttime="20230808 13:46:25.106" endtime="20230808 13:46:28.255"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>//button[@id="onetrust-reject-all-handler"]</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20230808 13:46:28.255" endtime="20230808 13:46:30.408"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>//button[@id="onetrust-reject-all-handler"]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20230808 13:46:30.409" level="INFO">Clicking element '//button[@id="onetrust-reject-all-handler"]'.</msg>
+<status status="PASS" starttime="20230808 13:46:30.408" endtime="20230808 13:46:30.527"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//*[@id="c-tracking--input"]</arg>
+<arg>5548230321</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230808 13:46:30.529" level="INFO">Typing text '5548230321' into text field '//*[@id="c-tracking--input"]'.</msg>
+<status status="PASS" starttime="20230808 13:46:30.527" endtime="20230808 13:46:30.683"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>//button[@type="submit"]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20230808 13:46:30.684" level="INFO">Clicking button '//button[@type="submit"]'.</msg>
+<msg timestamp="20230808 13:46:30.781" level="FAIL">ElementNotInteractableException: Message: element not interactable
+  (Session info: chrome=115.0.5790.111)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x005BA813+48355]
+	(No symbol) [0x0054C4B1]
+	(No symbol) [0x00455220]
+	(No symbol) [0x00481846]
+	(No symbol) [0x00479F5C]
+	(No symbol) [0x0049A73C]
+	(No symbol) [0x00479A36]
+	(No symbol) [0x0049AA94]
+	(No symbol) [0x004AC922]
+	(No symbol) [0x0049A536]
+	(No symbol) [0x004782DC]
+	(No symbol) [0x004793DD]
+	GetHandleVerifier [0x0081AABD+2539405]
+	GetHandleVerifier [0x0085A78F+2800735]
+	GetHandleVerifier [0x0085456C+2775612]
+	GetHandleVerifier [0x006451E0+616112]
+	(No symbol) [0x00555F8C]
+	(No symbol) [0x00552328]
+	(No symbol) [0x0055240B]
+	(No symbol) [0x00544FF7]
+	BaseThreadInitThunk [0x771A7D59+25]
+	RtlInitializeExceptionChain [0x77A5B79B+107]
+	RtlClearBits [0x77A5B71F+191]
+</msg>
+<status status="FAIL" starttime="20230808 13:46:30.683" endtime="20230808 13:46:30.797"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>100000000</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20230808 13:46:30.798" endtime="20230808 13:46:30.798"/>
+</kw>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<arg>return document.evaluate('//*[@id="c-tracking--input"]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.value=5548230321;</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="NOT RUN" starttime="20230808 13:46:30.798" endtime="20230808 13:46:30.798"/>
+</kw>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<arg>return document.evaluate('//button[@type="submit"]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="NOT RUN" starttime="20230808 13:46:30.798" endtime="20230808 13:46:30.798"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>10000000000</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" starttime="20230808 13:46:30.798" endtime="20230808 13:46:30.798"/>
+</kw>
+<status status="FAIL" starttime="20230808 13:46:25.104" endtime="20230808 13:46:30.799">ElementNotInteractableException: Message: element not interactable
+  (Session info: chrome=115.0.5790.111)
+Stacktrace:
+Backtrace:
+	GetHandleVerifier [0x005BA813+48355]
+	(No symbol) [0x0054C4B1]
+	(No symbol) [0x00455220]
+	(No symbol) [0x00481846]
+	(No symbol) [0x00479F5C]
+	(No symbol) [0x0049A73C]
+	(No symbol) [0x00479A36]
+	(No symbol) [0x0049AA94]
+	(No symbol) [0x004AC922]
+	(No symbol) [0x0049A536]
+	(No symbol) [0x004782DC]
+	(No symbol) [0x004793DD]
+	GetHandleVerifier [0x0081AABD+2539405]
+	GetHandleVerifier [0x0085A78F+2800735]
+	GetHandleVerifier [0x0085456C+2775612]
+	GetHandleVerifier [0x006451E0+616112]
+	(No symbol) [0x00555F8C]
+	(No symbol) [0x00552328]
+	(No symbol) [0x0055240B]
+	(No symbol) [0x00544FF7]
+	BaseThreadInitThunk [0x771A7D59+25]
+	RtlInitializeExceptionChain [0x77A5B79B+107]
+	RtlClearBits [0x77A5B71F+191]
+</status>
+</test>
+<status status="FAIL" starttime="20230808 13:46:08.505" endtime="20230808 13:46:30.803"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="1" skip="0" id="s1" name="Scraping Senheng">Scraping Senheng</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

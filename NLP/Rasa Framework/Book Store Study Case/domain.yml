@@ -1,0 +1,100 @@
+version: "3.1"
+
+intents:
+  - sapa
+  - pergi
+  - setuju
+  - tolak
+  - intent_nama
+  - intent_NomorTelp
+  - intent_email
+  - intent_alamat
+
+entities:
+- nama
+- email
+- no_telp
+
+slots:
+  nama:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: nama
+        conditions:
+         - active_loop: membership_form
+           requested_slot: nama
+
+  no_telp:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: no_telp
+        conditions:
+         - active_loop: membership_form
+           requested_slot: no_telp
+
+  email:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: email
+        conditions:
+         - active_loop: membership_form
+           requested_slot: email
+
+  alamat:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        conditions:
+         - active_loop: membership_form
+           requested_slot: alamat
+forms:
+  membership_form:
+    required_slots:
+    - nama
+    - no_telp
+    - email
+    - alamat
+
+actions:
+- validate_membership_form
+- action_submit_to_db
+
+responses:
+  utter_sapa:
+  - text: "Hai. Selamat datang di toko buku Aufar."
+    image: "https://www.washingtonian.com/wp-content/uploads/2022/07/OldTownBooks-310-2048x1365.jpg"
+
+  utter_membership:
+  - text: "Kami menyediakan membership di toko kami. Apakah anda berminat mendaftar?"
+
+  utter_ask_nama:
+  - text: "Boleh disebutkan nama panjang anda?"
+
+  utter_ask_no_telp:
+  - text: "Silahkan isi nomor telepon yang aktif."
+
+  utter_ask_email:
+  - text: "Boleh disebutkan email anda yang aktif?"
+
+  utter_ask_alamat:
+  - text: "Silahkan isi alamat tempat tinggal anda."
+
+  utter_selesai_membership:
+  - text: "Terima kasih {nama}, anda berhasil menjadi member di toko kami."
+
+  utter_pergi:
+  - text: "Sampai jumpa kembali."
+
+  utter_ngelantur:
+  - text: "Maaf, bisa diulang kembali? Saya tidak paham maksudnya."
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

@@ -1,0 +1,8 @@
+Revisian :
+1. Ambil hashtag dari tweet, tapi ttp di cleanse, dari ambil tsb, tiap tag dihitung freq dan persentase nya (Done)
+2. Network nya itu aktor, disambungin berdasarkan tag (Done)
+3. Screenshot hasil, ubah jadi excel, dri awal sampe akhir (Done)
+4. Ambil Total Comment, Retweet, Like (Done)
+
+Notes :
+- Untuk poin 4, memakan waktu yang sangat lama yaitu sekitar (Runtime : 260 minutes.)

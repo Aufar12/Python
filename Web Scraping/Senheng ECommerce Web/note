@@ -1,0 +1,51 @@
+https://www.senheng.com.my/home-entertainment/tv.html
+
+Name,
+Price, 
+Promotions,
+Reviews
+
+Every Product
+//*[@id="maincontent"]/div[3]/div[5]//div[2]//div[1]
+
+Name
+//*[@id="maincontent"]//h1
+
+Price
+//*[@id="maincontent"]/div[4]/div[2]/div[1]/span[2]
+
+Reviews
+//*[@id="reviewTab"]/span[1]
+//*[@id="full-width-tabpanel-2"]//p
+
+Promotions
+Specification
+Picture
+
+
+//p[contains(text(),"Customers viewed today")]
+
+
+//*[@id="maincontent"]//div[@class='short-description__text']
+
+Image :
+//div[@class="productSlider__thumbnail--item"]//img
+
+No Promotions:
+https://www.senheng.com.my/sony-77-bravia-a80l-4k-hdr-oled-google-tv-xr77a80l.html
+
+Keyword :
+Spefication
+Image
+Cleanse String
+Promotions
+
+Task
+Open Browser
+Scrap
+Turn into Excel
+Turn into Diagram
+
+Bar diagram yang ke samping
+Pie chart, untuk liat berapa inci itu kebeli berapa
+Pie chart, untuk produk
