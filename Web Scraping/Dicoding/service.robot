@@ -5,8 +5,8 @@ Library         SeleniumLibrary          run_on_failure=Nothing
 ***Variables***
 ${url}          https://www.dicoding.com/academies/266
 ${browser}      Chrome
-${username}     m.aufar12@gmail.com
-${password}     metalchameleon2
+${username}     dummy@email.com
+${password}     dummyPassword
 
 ***Tasks***
 Login Dicoding

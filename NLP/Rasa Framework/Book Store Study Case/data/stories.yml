@@ -29,7 +29,7 @@ stories:
   - slot_was_set:
     - requested_slot: email
   - slot_was_set:
-    - email: m.aufar12@gmail.com
+    - email: dummy@email.com
   - slot_was_set:
     - requested_slot: alamat
   - slot_was_set:

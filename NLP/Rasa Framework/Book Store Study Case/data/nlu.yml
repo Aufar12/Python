@@ -70,11 +70,11 @@ nlu:
 
 - intent: intent_email
   examples: |
-    - [m.aufar12@gmail.com](email)
+    - [dummy@email.com](email)
     - [jeni_jani_snsn@yahoo.com](email)
     - [b123Ahsksk.s_j@rocketmail.com](email)
     - [tes_123@tes.co.id](email)
-    - [mohammad.aufar@ai.astra.co.id](email)
+    - [dummy@email.com](email)
     - email saya yaitu [james.jake@company.com](email)
     - Email saya [xxx123@perusahaan.co.id](email)
     - email saya yaitu [robert_mifflin222@sebuahperusahaan.com](email)

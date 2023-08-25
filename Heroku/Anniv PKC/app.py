@@ -155,8 +155,8 @@ def sendEmail(message, types='text', attachments=[]):
         confMail = json.load(json_file)
     
     msg['From']     = confMail['displayname']
-    msg['To']       = 'm.aufar12@gmail.com'
-    msg['CC']       = 'm.aufar08@gmail.com'
+    msg['To']       = 'dummy@email.com'
+    msg['CC']       = 'dummy@email.com'
     msg['Subject']  = '1st Anniversary PKC Questionaire'
     text = message
 
